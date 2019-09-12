@@ -1,0 +1,41 @@
+language: node_js
+
+node_js:
+- 'lts/*'
+
+env:
+  global:
+    - IMAGE_NAME=rflpazini/bidu
+
+install:
+  - npm install -g codecov
+  - npm install
+
+cache:
+  directories:
+    - node_modules
+
+services:
+  - docker
+
+before_install:
+  - npm update -g npm
+
+script:
+  - npm run test:coverage
+  - npm run lint
+  - docker build --tag "$IMAGE_NAME" .
+
+before_deploy:
+  - TAG="$(git log -1 --pretty=%h)"
+  - VERSION="$(awk '$2 == "BIDU_VERSION" { print $3; exit }' Dockerfile)"
+
+deploy:
+  - provider: script
+    script: bash .travis/docker_push_staging $TAG
+    on:
+      branch: staging
+  - provider: script
+    script: bash .travis/docker_push_production $VERSION
+    on:
+      branch: master
