@@ -1,5 +1,3 @@
-const createError = require('http-errors');
-
 const Users = require('../persistence/Users');
 
 class UsersService {
@@ -32,13 +30,7 @@ class UsersService {
   static async findByEmail(req, res, next) {
     try {
       const user = await Users.findByEmail(req.query.email);
-      if (!user) {
-        return res
-          .status(404)
-          .json({
-            message: `Error on trying to search user: ${req.query.email}`,
-          });
-      }
+
       res.status(200).json(user);
     } catch (error) {
       console.error(
@@ -47,7 +39,7 @@ class UsersService {
 
       return res
         .status(400)
-        .json({ message: `Error when try to searching for user: ${error}` });
+        .json({ message: `Error when try to search user: ${error}` });
     }
   }
 
@@ -67,16 +59,16 @@ class UsersService {
 
   static async delete(req, res, next) {
     try {
-        const users = await Users.delete(req.body.email);
-  
-        res.status(200).json(users);
-      } catch (error) {
-        console.error(`delete(${req.body.email}) >> Error: ${error.stack}`);
-  
-        return res
-          .status(404)
-          .json({ message: `Error on trying to delete user ${req.body.email} >> Error: ${error}` });
-      }
+      const users = await Users.delete(req.body.email);
+
+      res.status(200).json(users);
+    } catch (error) {
+      console.error(`delete(${req.body.email}) >> Error: ${error.stack}`);
+
+      return res.status(404).json({
+        message: `Error on trying to delete user ${req.body.email} >> Error: ${error}`,
+      });
+    }
   }
 }
 

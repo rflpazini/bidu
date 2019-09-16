@@ -36,4 +36,4 @@ new Promise((resolve, reject) => {
   .catch(error => {
     console.error(error.stack);
     process.exit(1);
-  });
+  }); 

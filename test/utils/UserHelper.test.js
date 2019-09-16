@@ -15,10 +15,15 @@ describe('User helper ', () => {
   test('should compare a password with a hashed one and return true', async () => {
     //given
     const mockedPassword = 'Sh3rL0ck';
-    const hashedPassword = await UserHelper.createHashedPassword(mockedPassword);
+    const hashedPassword = await UserHelper.createHashedPassword(
+      mockedPassword
+    );
 
     // when
-    const actual = await UserHelper.comparePassword(hashedPassword, mockedPassword);
+    const actual = await UserHelper.comparePassword(
+      hashedPassword,
+      mockedPassword
+    );
 
     //then
     expect(actual).toBeTruthy();
@@ -27,10 +32,15 @@ describe('User helper ', () => {
   test('should compare a two differents passwords', async () => {
     //given
     const mockedPassword = 'Sh3rL0ck';
-    const hashedPassword = await UserHelper.createHashedPassword('Another value');
+    const hashedPassword = await UserHelper.createHashedPassword(
+      'Another value'
+    );
 
     // when
-    const actual = await UserHelper.comparePassword(hashedPassword, mockedPassword);
+    const actual = await UserHelper.comparePassword(
+      hashedPassword,
+      mockedPassword
+    );
 
     //then
     expect(actual).toBeFalsy();

@@ -24,7 +24,8 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "superagent": "^5.1.0",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "testcontainers": "^2.0.0"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

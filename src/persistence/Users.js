@@ -12,7 +12,7 @@ class Users {
 
       const { rows } = await db.query(sql`
       INSERT INTO users (id, email, password, created_at, updated_at)
-        VALUES (${uuid()}, ${email}, ${hashedPassword}, ${moment (
+        VALUES (${uuid()}, ${email}, ${hashedPassword}, ${moment(
         new Date()
       )}, ${moment(new Date())})
         RETURNING id, email;
