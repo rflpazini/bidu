@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const config = require('./config');
 
-const apiRouter = require('./src/router');
+const apiRouter = require('./src/api/router');
 
 app.use(bodyParser.json());
 app.use(apiRouter);
