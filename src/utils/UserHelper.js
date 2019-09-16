@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 
-class Helper {
+class UserHelper {
   static async createHashedPassword(password) {
     return bcrypt.hash(password, 10);
   }
@@ -10,4 +10,4 @@ class Helper {
   }
 }
 
-module.exports = Helper;
+module.exports = UserHelper;

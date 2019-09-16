@@ -1,10 +1,11 @@
-FROM node:10-alpine
+FROM node:10
 
 ENV BIDU_VERSION 0.0.1
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
