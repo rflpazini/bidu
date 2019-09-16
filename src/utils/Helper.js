@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
 
 class Helper {
-  static createHashedPassword(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  static async createHashedPassword(password) {
+    return bcrypt.hash(password, 10);
   }
 
-  static comparePassword(hashPassword, password) {
-    return bcrypt.compareSync(password, hashPassword);
+  static async comparePassword(hashPassword, password) {
+    return bcrypt.compare(password, hashPassword);
   }
 }
 

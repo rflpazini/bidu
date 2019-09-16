@@ -8,7 +8,7 @@ const Helper = require('../utils/Helper');
 class Users {
   async create(email, password) {
     try {
-      const hashedPassword = Helper.createHashedPassword(password);
+      const hashedPassword = await Helper.createHashedPassword(password);
 
       const { rows } = await db.query(sql`
       INSERT INTO users (id, email, password, created_at, updated_at)
