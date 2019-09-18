@@ -153,16 +153,4 @@ describe('User routes', () => {
         done();
       });
   });
-
-  test("should return 404 when couldn'd delete a user", done => {
-    request(app)
-      .delete('/v1.0/users')
-      .send({
-        email: 'cacildi',
-      })
-      .end((err, res) => {
-        expect(res.statusCode).toBe(404);
-        done();
-      });
-  });
 });
