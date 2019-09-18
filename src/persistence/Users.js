@@ -3,12 +3,12 @@ const uuid = require('uuid/v4');
 const moment = require('moment');
 
 const db = require('./DataBase');
-const UserHelper = require('../utils/UserHelper');
+const EncryptHelper = require('../utils/EncryptHelper');
 
 class Users {
   static async create(email, password) {
     try {
-      const hashedPassword = await UserHelper.createHashedPassword(password);
+      const hashedPassword = await EncryptHelper.createHashedPassword(password);
 
       const { rows } = await db.query(sql`
       INSERT INTO users (id, email, password, created_at, updated_at)
@@ -22,7 +22,10 @@ class Users {
 
       return user;
     } catch (error) {
-      if (error.constraint === 'users_email_key') {
+      if (
+        error.constraint === 'users_email_key' ||
+        error.constraint === 'users_email_unique'
+      ) {
         return null;
       }
 

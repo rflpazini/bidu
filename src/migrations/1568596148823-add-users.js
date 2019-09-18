@@ -1,6 +1,8 @@
 const db = require('../persistence/DataBase');
 
 module.exports.up = async function(next) {
+  console.debug(db);
+  console.debug(process.env.DATABASE_URL);
   const client = await db.connect();
 
   await client.query(`

@@ -8,6 +8,7 @@ const migrationsDirectory = path.resolve(__dirname, '../src/migrations');
 const [command] = process.argv.slice(2);
 
 new Promise((resolve, reject) => {
+  console.debug(stateStore)
   migrate.load(
     {
       stateStore,
@@ -30,7 +31,7 @@ new Promise((resolve, reject) => {
   );
 })
   .then(() => {
-    console.log(`Migrations "${command}" successfully ran`);
+    console.debug(`Migrations "${command}" successfully ran`);
     process.exit(0);
   })
   .catch(error => {

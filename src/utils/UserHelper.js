@@ -1,12 +1,6 @@
-const bcrypt = require('bcrypt');
-
 class UserHelper {
-  static async createHashedPassword(password) {
-    return bcrypt.hash(password, 10);
-  }
-
-  static async comparePassword(hashPassword, password) {
-    return bcrypt.compare(password, hashPassword);
+  static isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
   }
 }
 

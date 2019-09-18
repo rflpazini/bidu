@@ -5,7 +5,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      DATABASE_URL: postgres://bidu:pass@postgres:5432/bidu
       NODE_ENV: development
       PORT: 8080
     ports:
@@ -16,10 +16,9 @@ services:
       - /app/node_modules/
 
   postgres:
-    image: postgres:10.4
+    image: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: bidu
       POSTGRES_PASSWORD: pass
-      POSTGRES_DB: db

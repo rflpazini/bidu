@@ -1,46 +1,23 @@
-const UserHelper = require('../../src/utils/UserHelper');
+const target = require('../../src/utils/UserHelper');
 
 describe('User helper ', () => {
-  test('should return an encoded password', async () => {
+  test('should return true with a valid email', async () => {
     //given
-    const mockedPassword = 'Sh3rL0ck';
+    const mockedEmail = 'rflpazini@gmail.com';
 
     // when
-    const actual = await UserHelper.createHashedPassword(mockedPassword);
-
-    //then
-    expect(actual).not.toBeNull();
-  });
-
-  test('should compare a password with a hashed one and return true', async () => {
-    //given
-    const mockedPassword = 'Sh3rL0ck';
-    const hashedPassword = await UserHelper.createHashedPassword(
-      mockedPassword
-    );
-
-    // when
-    const actual = await UserHelper.comparePassword(
-      hashedPassword,
-      mockedPassword
-    );
+    const actual = await target.isValidEmail(mockedEmail);
 
     //then
     expect(actual).toBeTruthy();
   });
 
-  test('should compare a two differents passwords', async () => {
+  test('should return false with an invalid email', async () => {
     //given
-    const mockedPassword = 'Sh3rL0ck';
-    const hashedPassword = await UserHelper.createHashedPassword(
-      'Another value'
-    );
+    const mockedEmail = 'rflpazini';
 
     // when
-    const actual = await UserHelper.comparePassword(
-      hashedPassword,
-      mockedPassword
-    );
+    const actual = await target.isValidEmail(mockedEmail);
 
     //then
     expect(actual).toBeFalsy();

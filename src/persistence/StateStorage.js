@@ -1,10 +1,11 @@
 const sql = require('sql-template-strings');
+
 const db = require('./DataBase');
 
-const ensureMigrationsTable = db =>
-  db.query(
-    'CREATE TABLE IF NOT EXISTS migrations (id integer PRIMARY KEY, data jsonb NOT NULL)'
-  );
+const ensureMigrationsTable = db => console.debug(db);
+db.query(
+  'CREATE TABLE IF NOT EXISTS migrations (id integer PRIMARY KEY, data jsonb NOT NULL)'
+);
 
 const postgresStateStorage = {
   async load(fn) {
