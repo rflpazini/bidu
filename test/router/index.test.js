@@ -10,7 +10,7 @@ describe('Basic routes', () => {
     request(app)
       .get('/ping')
       .end((err, res) => {
-        expect(res.status).toEqual(200);
+        expect(res.statusCode).toEqual(200);
         expect(res.text).toEqual('pong');
         done();
       });
