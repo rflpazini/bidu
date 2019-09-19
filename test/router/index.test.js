@@ -2,15 +2,10 @@ const request = require('supertest');
 const app = require('../../app');
 
 describe('Basic routes', () => {
-  afterAll(done => {
-    app.close(done);
-  });
-
-  test('should return 200 on ping route', done => {
+  test('should respond ping route', done => {
     request(app)
       .get('/ping')
       .end((err, res) => {
-        expect(res.statusCode).toEqual(200);
         expect(res.text).toEqual('pong');
         done();
       });
