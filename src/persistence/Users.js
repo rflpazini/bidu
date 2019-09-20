@@ -28,7 +28,7 @@ class Users {
       ) {
         return null;
       }
-      console.error(`create() >> Error: ${error.stack}`)
+      console.error(`create() >> Error: ${error.stack}`);
       throw error;
     }
   }
@@ -41,7 +41,7 @@ class Users {
 
       return rows;
     } catch (error) {
-      console.error(`findAll() >> Error: ${error.stack}`)
+      console.error(`findAll() >> Error: ${error.stack}`);
       throw error;
     }
   }
@@ -54,7 +54,7 @@ class Users {
 
       return rows[0];
     } catch (error) {
-      console.error(`findByEmail() >> Error: ${error.stack}`)
+      console.error(`findByEmail() >> Error: ${error.stack}`);
       throw error;
     }
   }
@@ -69,7 +69,20 @@ class Users {
 
       return rows[0];
     } catch (error) {
-      console.error(`delete() >> Error: ${error.stack}`)
+      console.error(`delete() >> Error: ${error.stack}`);
+      throw error;
+    }
+  }
+
+  static async findById(id) {
+    try {
+      const { rows } = await db.query(sql`
+    SELECT * FROM users WHERE id=${id};
+    `);
+
+      return rows[0];
+    } catch (error) {
+      console.error(`findById() >> Error: ${error.stack}`);
       throw error;
     }
   }

@@ -142,6 +142,81 @@ describe('User routes', () => {
       });
   });
 
+  test('should login a user', done => {
+    request(app)
+      .post('/v1.0/users/login')
+      .send({
+        email: 'rflpazini@gmail.com',
+        password: 'Sh3rl0ck',
+      })
+      .end((err, res) => {
+        expect(res).not.toBeNull();
+        expect(res.statusCode).toBe(200);
+        expect(res.body.token).not.toBeNull();
+        done();
+      });
+  });
+
+  test('should not login a user with wrong password', done => {
+    request(app)
+      .post('/v1.0/users/login')
+      .send({
+        email: 'rflpazini@gmail.com',
+        password: 'asdasdsadsadsadasd',
+      })
+      .end((err, res) => {
+        expect(res).not.toBeNull();
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toBe('Your credentials are incorrect');
+        done();
+      });
+  });
+
+  test('should not login a user without password', done => {
+    request(app)
+      .post('/v1.0/users/login')
+      .send({
+        email: 'rflpazini@gmail.com',
+        password: '',
+      })
+      .end((err, res) => {
+        expect(res).not.toBeNull();
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toBe('Email and password must be provided');
+        done();
+      });
+  });
+
+  test('should not login a user without a valid email', done => {
+    request(app)
+      .post('/v1.0/users/login')
+      .send({
+        email: 'rflpazini',
+        password: 'asdasdasdasdasdas',
+      })
+      .end((err, res) => {
+        expect(res).not.toBeNull();
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toBe('Please enter a valid email address');
+        done();
+      });
+  });
+
+  test('should not login a user without email', done => {
+    request(app)
+      .post('/v1.0/users/login')
+      .send({
+        email: '',
+        password: 'asdasdasdsa',
+      })
+      .end((err, res) => {
+        expect(res).not.toBeNull();
+        expect(res.statusCode).toBe(400);
+        expect(res.body.message).toBe('Email and password must be provided');
+        done();
+      });
+  });
+
   test('should delete user', done => {
     request(app)
       .delete('/v1.0/users')

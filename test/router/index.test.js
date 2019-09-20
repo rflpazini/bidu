@@ -6,7 +6,7 @@ describe('Basic routes', () => {
     app.close(done);
   });
 
-  test('should return 200 ping route', done => {
+  test('should return 200 on ping', done => {
     request(app)
       .get('/ping')
       .end((err, res) => {
