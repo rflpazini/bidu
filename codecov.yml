@@ -26,3 +26,4 @@ comment: # configuration of the details the bot will comment on the PR
   branches: null
 ignore:
   - "config/*"
+  - "migrations/*"
