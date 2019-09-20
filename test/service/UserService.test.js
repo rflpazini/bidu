@@ -163,7 +163,7 @@ describe('User routes', () => {
       })
       .end((err, res) => {
         expect(res.statusCode).toBe(404);
-        expect(res.body.message).toBe('User rflpazini@gmail.comnot found...');
+        expect(res.body.message).toBe('User rflpazini@gmail.com not found...');
         done();
       });
   });

@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "migrate": "node ./bin/migrate.js",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'src/*/*.js' 'test/*/*.js' 'src/*/!(node_modules)/**/*.js'"
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/*/*.js' 'test/*/*.js' 'src/*/!(node_modules)/**/*.js'",
+    "travis:pipeline": "npm test && npm run lint && docker build --tag build-local-travis ."
   },
   "devDependencies": {
     "eslint": "^6.0.1",
