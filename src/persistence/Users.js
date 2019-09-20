@@ -73,6 +73,19 @@ class Users {
       throw error;
     }
   }
+
+  static async findById(id) {
+    try {
+      const { rows } = await db.query(sql`
+    SELECT * FROM users WHERE id=${id};
+    `);
+
+      return rows[0];
+    } catch (error) {
+      console.error(`findById() >> Error: ${error.stack}`);
+      throw error;
+    }
+  }
 }
 
 module.exports = Users;

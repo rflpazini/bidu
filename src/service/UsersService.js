@@ -82,7 +82,10 @@ class UsersService {
         .send({ message: 'Your credentials are incorrect' });
     }
 
-    const isSamePassword = await EncryptHelper.comparePassword(user.password, password);
+    const isSamePassword = await EncryptHelper.comparePassword(
+      user.password,
+      password
+    );
     if (!isSamePassword) {
       return res
         .status(400)
