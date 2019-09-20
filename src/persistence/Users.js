@@ -28,35 +28,50 @@ class Users {
       ) {
         return null;
       }
-
+      console.error(`create() >> Error: ${error.stack}`)
       throw error;
     }
   }
 
   static async findAll() {
-    const { rows } = await db.query(sql`
+    try {
+      const { rows } = await db.query(sql`
     SELECT * FROM users;
     `);
 
-    return rows;
+      return rows;
+    } catch (error) {
+      console.error(`findAll() >> Error: ${error.stack}`)
+      throw error;
+    }
   }
 
   static async findByEmail(email) {
-    const { rows } = await db.query(sql`
+    try {
+      const { rows } = await db.query(sql`
     SELECT * FROM users WHERE email=${email} LIMIT 1;
     `);
 
-    return rows[0];
+      return rows[0];
+    } catch (error) {
+      console.error(`findByEmail() >> Error: ${error.stack}`)
+      throw error;
+    }
   }
 
   static async delete(email) {
-    const { rows } = await db.query(sql`
+    try {
+      const { rows } = await db.query(sql`
       DELETE FROM users 
       WHERE email=${email} 
       RETURNING *;
     `);
 
-    return rows[0];
+      return rows[0];
+    } catch (error) {
+      console.error(`delete() >> Error: ${error.stack}`)
+      throw error;
+    }
   }
 }
 

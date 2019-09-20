@@ -29,7 +29,7 @@ describe('User routes', () => {
     await knex.migrate.latest();
   });
 
-  afterAll(async (done) => {
+  afterAll(async done => {
     await knex.destroy();
     await container.stop();
     app.close(done);
@@ -151,6 +151,19 @@ describe('User routes', () => {
       .end((err, res) => {
         expect(res.statusCode).toBe(200);
         expect(res.body).not.toBeNull();
+        done();
+      });
+  });
+
+  test('should not delete a user that not exists', done => {
+    request(app)
+      .delete('/v1.0/users')
+      .send({
+        email: 'rflpazini@gmail.com',
+      })
+      .end((err, res) => {
+        expect(res.statusCode).toBe(404);
+        expect(res.body.message).toBe('User rflpazini@gmail.comnot found...');
         done();
       });
   });
