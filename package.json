@@ -12,11 +12,11 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest && codecov",
+    "travis:pipeline": "npm test && npm run lint && docker build --tag build-local-travis .",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "migrate": "node ./bin/migrate.js",
-    "format": "prettier --trailing-comma es5 --single-quote --write 'src/*/*.js' 'test/*/*.js' 'src/*/!(node_modules)/**/*.js'",
-    "travis:pipeline": "npm test && npm run lint && docker build --tag build-local-travis ."
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/*/*.js' 'test/*/*.js' 'src/*/!(node_modules)/**/*.js'"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
