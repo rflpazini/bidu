@@ -1,5 +1,7 @@
 const Users = require('../persistence/Users');
 const UserHelper = require('../utils/UserHelper');
+const AuthHelper = require('../utils/AuthHelper');
+const EncryptHelper = require('../utils/EncryptHelper');
 
 class UsersService {
   static async create(req, res, next) {
@@ -17,7 +19,7 @@ class UsersService {
       console.info(`validadeUser(${email}) >> Error: Invalid email`);
 
       return res.status(400).json({
-        message: `Please provide a valid email...`,
+        message: 'Please provide a valid email...',
       });
     }
 
@@ -55,6 +57,41 @@ class UsersService {
     }
 
     return res.status(200).json(user);
+  }
+
+  static async login(req, res) {
+    const password = req.body.password;
+    const email = req.body.email;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .send({ message: 'Email and password must be provided' });
+    }
+
+    if (!UserHelper.isValidEmail(email)) {
+      return res
+        .status(400)
+        .send({ message: 'Please enter a valid email address' });
+    }
+
+    const user = await Users.findByEmail(email);
+    if (!user) {
+      return res
+        .status(404)
+        .send({ message: 'Your credentials are incorrect' });
+    }
+
+    const isSamePassword = await EncryptHelper.comparePassword(user.password, password);
+    if (!isSamePassword) {
+      return res
+        .status(400)
+        .send({ message: 'Your credentials are incorrect' });
+    }
+
+    const token = await AuthHelper.createToken(user.id);
+
+    return res.status(200).send({ token });
   }
 }
 
