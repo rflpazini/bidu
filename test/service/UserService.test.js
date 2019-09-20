@@ -29,9 +29,10 @@ describe('User routes', () => {
     await knex.migrate.latest();
   });
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await knex.destroy();
     await container.stop();
+    app.close(done);
   });
 
   test('should get all users', done => {
