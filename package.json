@@ -12,27 +12,40 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest && codecov",
+    "travis:pipeline": "npm test && npm run lint && docker build --tag build-local-travis .",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "migrate": "node ./bin/migrate.js",
     "format": "prettier --trailing-comma es5 --single-quote --write 'src/*/*.js' 'test/*/*.js' 'src/*/!(node_modules)/**/*.js'"
   },
   "devDependencies": {
     "eslint": "^6.0.1",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
+    "knex": "^0.19.4",
     "lint-staged": "^9.2.0",
+    "node-cmd": "^3.0.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "superagent": "^5.1.0",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "testcontainers": "^2.0.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
-    "qs": "^6.7.0"
+    "jsonwebtoken": "^8.5.1",
+    "migrate": "^1.6.2",
+    "moment": "^2.24.0",
+    "pg": "^7.12.1",
+    "qs": "^6.7.0",
+    "sql-template-strings": "^2.2.2",
+    "uuid": "^3.3.3"
   },
   "husky": {
     "hooks": {

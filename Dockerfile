@@ -1,13 +1,14 @@
-FROM node:10-alpine
+FROM node:10
 
-ENV BIDU_VERSION 0.0.1
+ENV BIDU_VERSION 1.0.0
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
 
 EXPOSE 8080
-CMD [ "npm", “run”, "start:prod"  ]
+CMD [ "npm", “run”, "start:prod" ]

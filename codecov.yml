@@ -9,15 +9,11 @@ coverage:
    patch: 
      default: off
      pr_coverage:
-       target: 95%
+       target: 90%
    project:
      default: off
      minimum: # minimum target of coverage needed to pass the check
        target: 90%
-     decrement: # maximum decrement of coverage allowed
-       target: auto
-       threshold: 0.2%
-       if_not_found: success
 comment: # configuration of the details the bot will comment on the PR
   layout: "header, diff, tree, changes"
   behavior: default
@@ -27,3 +23,4 @@ comment: # configuration of the details the bot will comment on the PR
   branches: null
 ignore:
   - "config/*"
+  - "migrations/*"
